@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ContactList from "./components/ContactList";
 import "./App.css";
+import ContactForm from "./components/ContactForm";
 
 function App() {
   const [contacts, setContacts] = useState([]);
@@ -19,6 +20,7 @@ function App() {
   return (
     <>
       <ContactList contacts={contacts} />
+      <ContactForm />
     </>
   );
 }
