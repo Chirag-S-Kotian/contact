@@ -159,6 +159,15 @@
         "documentation": {}
     },
     {
+        "label": "update_contact",
+        "kind": 2,
+        "importPath": "backend.main",
+        "description": "backend.main",
+        "peekOfCode": "def update_contact(user_id):\n    contact = Contact.query.get(user_id)\n    if not contact:\n        return jsonify({\"message\": \"Contact not found\"}), 404\n    data = request.json\n    contact.first_name = data.get(\"firstName\",contact.first_name)\nif __name__ == \"__main__\":\n    with app.app_context():\n        db.create_all()\n    app.run(debug=True)",
+        "detail": "backend.main",
+        "documentation": {}
+    },
+    {
         "label": "Contact",
         "kind": 6,
         "importPath": "backend.models",
