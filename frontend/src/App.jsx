@@ -16,7 +16,11 @@ function App() {
     console.log(data, contacts);
   };
 
-  return <ContactList contacts={contacts} />;
+  return (
+    <>
+      <ContactList contacts={contacts} />
+    </>
+  );
 }
 
 export default App;
