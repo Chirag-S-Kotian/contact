@@ -181,7 +181,7 @@
         "kind": 6,
         "importPath": "backend.models",
         "description": "backend.models",
-        "peekOfCode": "class Contact(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    first_name = db.Column(db.String(100),unique=False, nullable=False)\n    last_name = db.Column(db.String(100),unique=False, nullable=False)\n    email = db.Column(db.String(100),unique=True, nullable=False)\n    def to_json(self):\n        return {\n            'id': self.id,\n            'firstName': self.first_name,\n            'lastName': self.last_name,",
+        "peekOfCode": "class Contact(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    first_name = db.Column(db.String(80), unique=False, nullable=False)\n    last_name = db.Column(db.String(80), unique=False, nullable=False)\n    email = db.Column(db.String(120), unique=True, nullable=False)\n    def to_json(self):\n        return {\n            \"id\": self.id,\n            \"firstName\": self.first_name,\n            \"lastName\": self.last_name,",
         "detail": "backend.models",
         "documentation": {}
     },
