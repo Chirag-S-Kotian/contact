@@ -3,12 +3,15 @@ from config import app,db
 from models import Contact
 
 
+# route for getting all contacts
 @app.route('/contacts', methods=['GET'])
 def get_contacts():
     contacts = Contact.query.all()
     json_contacts = list(map(lambda x: x.to_json(), contacts))
     return jsonify({"contacts": json_contacts})
 
+
+# route for creating a new contact
 @app.route("/create", methods=['POST'])
 def create_contact():
     first_name = request.json.get("first_name")
@@ -30,6 +33,7 @@ def create_contact():
     return jsonify({"message": "Contact created successfully"}),201
 
 
+# route for updating contact
 @app.route("/update_contact/<int:user_id>",methods=['PATCH'])
 def update_contact(user_id):
     contact = Contact.query.get(user_id)
@@ -44,6 +48,19 @@ def update_contact(user_id):
 
     db.session.commit()
     return jsonify({"message": "Contact updated successfully"}), 200
+
+
+# route for deleting contact
+@app.route("/delete_contact/<int:user_id>",methods=['DELETE'])
+def delete_contact(user_id):
+    contact = Contact.query.get(user_id)
+
+    if not contact:
+        return jsonify({"message": "Contact not found"}), 404
+    
+    db.session.delete(contact)
+    db.session.commit()
+    return jsonify({"message": "Contact deleted successfully"}), 200
 
 if __name__ == "__main__":
     with app.app_context():
