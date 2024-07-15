@@ -8,14 +8,6 @@
         "documentation": {}
     },
     {
-        "label": "Flask",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
         "label": "request",
         "importPath": "flask",
         "description": "flask",
@@ -145,7 +137,7 @@
         "kind": 2,
         "importPath": "backend.main",
         "description": "backend.main",
-        "peekOfCode": "def get_contacts():\n    contacts = Contact.query.all()\n    json_contacts = list(map(lambda x: x.to_json(), contacts))\n    return jsonify({\"contacts\": json_contacts})\n# route for creating a new contact\n@app.route(\"/create\", methods=['POST'])\ndef create_contact():\n    first_name = request.json.get(\"first_name\")\n    last_name = request.json.get(\"last_name\")\n    email = request.json.get(\"email\")",
+        "peekOfCode": "def get_contacts():\n    contacts = Contact.query.all()\n    json_contacts = list(map(lambda x: x.to_json(), contacts))\n    return jsonify({\"contacts\": json_contacts})\n# Create new contact\n@app.route(\"/create_contact\", methods=[\"POST\"])\ndef create_contact():\n    first_name = request.json.get(\"firstName\")\n    last_name = request.json.get(\"lastName\")\n    email = request.json.get(\"email\")",
         "detail": "backend.main",
         "documentation": {}
     },
@@ -154,7 +146,7 @@
         "kind": 2,
         "importPath": "backend.main",
         "description": "backend.main",
-        "peekOfCode": "def create_contact():\n    first_name = request.json.get(\"first_name\")\n    last_name = request.json.get(\"last_name\")\n    email = request.json.get(\"email\")\n    if not first_name or not last_name or not email:\n        return (\n            jsonify({\"message\": \"Missing data\"}),\n             400,\n        )\n    new_contact = Contact(first_name=first_name, last_name=last_name, email=email)",
+        "peekOfCode": "def create_contact():\n    first_name = request.json.get(\"firstName\")\n    last_name = request.json.get(\"lastName\")\n    email = request.json.get(\"email\")\n    if not first_name or not last_name or not email:\n        return (\n            jsonify({\"message\": \"You must include a first name, last name and email\"}),\n            400,\n        )\n    new_contact = Contact(first_name=first_name, last_name=last_name, email=email)",
         "detail": "backend.main",
         "documentation": {}
     },
@@ -163,7 +155,7 @@
         "kind": 2,
         "importPath": "backend.main",
         "description": "backend.main",
-        "peekOfCode": "def update_contact(user_id):\n    contact = Contact.query.get(user_id)\n    if not contact:\n        return jsonify({\"message\": \"Contact not found\"}), 404\n    data = request.json\n    contact.first_name = data.get(\"firstName\",contact.first_name)\n    contact.last_name = data.get(\"lastName\",contact.last_name)\n    contact.email = data.get(\"email\",contact.email)\n    db.session.commit()\n    return jsonify({\"message\": \"Contact updated successfully\"}), 200",
+        "peekOfCode": "def update_contact(user_id):\n    contact = Contact.query.get(user_id)\n    if not contact:\n        return jsonify({\"message\": \"User not found\"}), 404\n    data = request.json\n    contact.first_name = data.get(\"firstName\", contact.first_name)\n    contact.last_name = data.get(\"lastName\", contact.last_name)\n    contact.email = data.get(\"email\", contact.email)\n    db.session.commit()\n    return jsonify({\"message\": \"Usr updated.\"}), 200",
         "detail": "backend.main",
         "documentation": {}
     },
@@ -172,7 +164,7 @@
         "kind": 2,
         "importPath": "backend.main",
         "description": "backend.main",
-        "peekOfCode": "def delete_contact(user_id):\n    contact = Contact.query.get(user_id)\n    if not contact:\n        return jsonify({\"message\": \"Contact not found\"}), 404\n    db.session.delete(contact)\n    db.session.commit()\n    return jsonify({\"message\": \"Contact deleted successfully\"}), 200\nif __name__ == \"__main__\":\n    with app.app_context():\n        db.create_all()",
+        "peekOfCode": "def delete_contact(user_id):\n    contact = Contact.query.get(user_id)\n    if not contact:\n        return jsonify({\"message\": \"User not found\"}), 404\n    db.session.delete(contact)\n    db.session.commit()\n    return jsonify({\"message\": \"User deleted!\"}), 200\nif __name__ == \"__main__\":\n    with app.app_context():\n        db.create_all()",
         "detail": "backend.main",
         "documentation": {}
     },
